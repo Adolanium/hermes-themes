@@ -1,14 +1,15 @@
 /**
- * Linens — forest chrome + the riverbank painting as the chat backdrop.
- * Matches the empty-session splash: cream serif wordmark over the boats.
+ * ee.dd — forest chrome + the riverbank painting as the chat backdrop.
+ * Named after him.
  */
 
 import * as sdk from '@hermes/plugin-sdk'
 
-const ID = 'linens'
-const STYLE_ID = 'linens-style'
-const WALLPAPER_ID = 'linens-wallpaper'
-const FONT_ID = 'linens-font'
+const ID = 'ee.dd'
+const DOM = ID.replace(/\./g, '-')
+const STYLE_ID = `${DOM}-style`
+const WALLPAPER_ID = `${DOM}-wallpaper`
+const FONT_ID = `${DOM}-font`
 
 const forest = {
   background: '#122D1D',
@@ -39,10 +40,10 @@ const forest = {
   userBubbleBorder: '#2A4A34'
 }
 
-const linensTheme = {
-  name: 'linens',
-  label: 'Linens',
-  description: 'Forest chrome over the laundry-and-boats painting',
+const theme = {
+  name: ID,
+  label: 'ee.dd',
+  description: 'Forest chrome over the riverbank painting. Named after him.',
   colors: forest,
   darkColors: forest
 }
@@ -60,45 +61,45 @@ const CSS = `
   display: none;
 }
 
-html[data-hermes-theme="linens"] #${WALLPAPER_ID} {
+html[data-hermes-theme="${ID}"] #${WALLPAPER_ID} {
   display: block;
 }
 
-html[data-hermes-theme="linens"] #root {
+html[data-hermes-theme="${ID}"] #root {
   position: relative;
   z-index: 1;
   background: transparent !important;
 }
 
-html[data-hermes-theme="linens"] body {
+html[data-hermes-theme="${ID}"] body {
   background: transparent !important;
 }
 
-html[data-hermes-theme="linens"] {
+html[data-hermes-theme="${ID}"] {
   --ui-chat-surface-background: transparent !important;
   --ui-editor-surface-background: transparent !important;
   --ui-surface-background: transparent !important;
   --composer-fill: color-mix(in srgb, #1A3324 82%, transparent) !important;
 }
 
-html[data-hermes-theme="linens"] [data-chat-surface],
-html[data-hermes-theme="linens"] [data-slot="aui_thread-viewport"],
-html[data-hermes-theme="linens"] [data-slot="aui_thread-content"],
-html[data-hermes-theme="linens"] [data-slot="aui_intro"] {
+html[data-hermes-theme="${ID}"] [data-chat-surface],
+html[data-hermes-theme="${ID}"] [data-slot="aui_thread-viewport"],
+html[data-hermes-theme="${ID}"] [data-slot="aui_thread-content"],
+html[data-hermes-theme="${ID}"] [data-slot="aui_intro"] {
   background: transparent !important;
 }
 
-html[data-hermes-theme="linens"] [data-slot="composer-root"] {
+html[data-hermes-theme="${ID}"] [data-slot="composer-root"] {
   --composer-fill: color-mix(in srgb, #1A3324 82%, transparent) !important;
 }
 
-html[data-hermes-theme="linens"] [data-slot="composer-surface"] {
+html[data-hermes-theme="${ID}"] [data-slot="composer-surface"] {
   background: var(--composer-fill) !important;
   border-color: color-mix(in srgb, #EDE4C0 22%, transparent) !important;
   backdrop-filter: blur(10px);
 }
 
-html[data-hermes-theme="linens"] .wordmark {
+html[data-hermes-theme="${ID}"] .wordmark {
   font-family: "Cinzel", "Times New Roman", serif !important;
   font-weight: 700 !important;
   color: #F2E8C8 !important;
@@ -107,12 +108,12 @@ html[data-hermes-theme="linens"] .wordmark {
   text-shadow: 0 2px 22px rgba(10, 24, 16, 0.55);
 }
 
-html[data-hermes-theme="linens"] [data-slot="aui_intro"] p {
+html[data-hermes-theme="${ID}"] [data-slot="aui_intro"] p {
   color: #E8DCC0 !important;
   text-shadow: 0 1px 12px rgba(10, 24, 16, 0.5);
 }
 
-html[data-hermes-theme="linens"] [data-slot="aui_intro"] {
+html[data-hermes-theme="${ID}"] [data-slot="aui_intro"] {
   color: #E8DCC0 !important;
 }
 `
@@ -185,7 +186,7 @@ function ensureWallpaper(url) {
 
 function clearWallpaperSurfaces() {
   if (typeof document === 'undefined') return
-  if (document.documentElement.dataset.hermesTheme !== 'linens') return
+  if (document.documentElement.dataset.hermesTheme !== ID) return
   const vw = window.innerWidth
   const vh = window.innerHeight
   const skip = new Set([WALLPAPER_ID, STYLE_ID, FONT_ID])
@@ -204,19 +205,19 @@ function clearWallpaperSurfaces() {
 
 export default {
   id: ID,
-  name: 'Linens',
-  description: 'Forest chrome over the laundry-and-boats painting',
+  name: 'ee.dd',
+  description: 'Forest chrome over the riverbank painting. Named after him.',
   register(ctx) {
     const area = sdk.THEMES_AREA
     if (area) {
       ctx.register({
         id: 'theme',
         area,
-        data: linensTheme
+        data: theme
       })
     }
     if (typeof sdk.requestTheme === 'function') {
-      sdk.requestTheme('linens')
+      sdk.requestTheme(ID)
     }
 
     if (typeof document === 'undefined') return

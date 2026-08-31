@@ -10,7 +10,7 @@ Themes change how Hermes looks. They don't change how the agent thinks or how ma
 
 | Folder | What it is |
 | --- | --- |
-| `linens` | Forest chrome, cream wordmark, dusk riverbank behind the chat |
+| `ee.dd` | Forest chrome, cream wordmark, dusk riverbank behind the chat. Named after him. |
 
 ## Install a theme
 
@@ -41,30 +41,30 @@ If you use a named Hermes profile, put it under that profile instead:
 ~/.hermes/profiles/<name>/skins/
 ```
 
-You want this layout (Linens as an example):
+You want this layout (ee.dd as an example):
 
 ```
 desktop-plugins/
-  linens/
+  ee.dd/
     plugin.js
     wallpaper.jpg
-    linens.yaml
+    ee.dd.yaml
 
 skins/
-  linens.yaml
+  ee.dd.yaml
 ```
 
-Copy the whole `linens` folder into `desktop-plugins`. Then copy `linens.yaml` into `skins/` too. Same file, two homes. The plugin reads the wallpaper from its folder. The skin file is what `/skin` and `hermes config set display.skin` pick up.
+Copy the whole `ee.dd` folder into `desktop-plugins`. Then copy `ee.dd.yaml` into `skins/` too. Same file, two homes. The plugin reads the wallpaper from its folder. The skin file is what `/skin` and `hermes config set display.skin` pick up.
 
 Then tell Hermes to use it. Swap in the folder name:
 
 ```
-hermes config set display.skin linens
+hermes config set display.skin ee.dd
 ```
 
 In Hermes Desktop, run **Reload desktop plugins** from the command palette. Open a new session to see the splash.
 
-If the painting doesn't show, the plugin folder name has to match the slug (`linens`), and `wallpaper.jpg` has to sit next to `plugin.js`.
+If the painting doesn't show, the plugin folder name has to match the slug (`ee.dd`), and `wallpaper.jpg` has to sit next to `plugin.js`.
 
 ## What's in the folder
 
@@ -72,7 +72,7 @@ If the painting doesn't show, the plugin folder name has to match the slug (`lin
 | --- | --- |
 | `plugin.js` | Desktop theme, wallpaper, and wordmark |
 | `wallpaper.jpg` | Backdrop for the chat |
-| `linens.yaml` | CLI / TUI / desktop palette (name must match the folder) |
+| `ee.dd.yaml` | CLI / TUI / desktop palette (name must match the folder) |
 
 ## Revert
 

@@ -1,8 +1,8 @@
-# Linens — dark forest chrome over the riverbank painting.
-# Desktop wallpaper is injected by desktop-plugins/linens.
+# ee.dd — dark forest chrome over the riverbank painting.
+# Named after him. Desktop wallpaper is injected by desktop-plugins/ee.dd.
 
-name: linens
-description: Forest chrome over the laundry-and-boats painting
+name: ee.dd
+description: Forest chrome over the riverbank painting. Named after him.
 
 colors:
   background: "#122D1D"
