@@ -1,83 +1,63 @@
-# hermes-themes
+<div align="center">
 
-Custom themes for [Hermes Agent](https://github.com/NousResearch/hermes-agent).
+  <a href="https://github.com/NousResearch/hermes-agent">
+    <img src="https://github.com/user-attachments/assets/ac2f5702-c842-4b2e-9340-737481fa0ece" width="96" height="96" alt="Nous Research Hermes mark" />
+  </a>
 
-A collection of custom desktop themes. Each one lives in its own folder.
+  # Hermes Themes
 
-Themes change how Hermes looks. They don't change how the agent thinks or how many tokens it uses.
+  **42 gods for your Hermes desktop.**
 
-## Themes
+  Community theme packs for Hermes Desktop, each one a whole mythology.
+  Every god brings its own art, palette and lettering.
 
-| Folder | What it is |
-| --- | --- |
-| `ee.dd` | Forest chrome, cream wordmark, dusk riverbank behind the chat. Named after him. |
+  <sub>FOR <a href="https://github.com/NousResearch/hermes-agent">HERMES DESKTOP</a> &nbsp;·&nbsp; COMMUNITY THEMES &nbsp;·&nbsp; 3 PACKS</sub>
 
-## Install a theme
+  <br /><br />
 
-Each theme in this repo is one folder. Copy that whole folder into Hermes Desktop plugins. Don't dump the files loose. The folder name is the theme's slug.
+  [Open the star atlas](https://adolanium.github.io/hermes-themes/) &nbsp;·&nbsp; [The packs](#the-packs) &nbsp;·&nbsp; [Install one](#install-one)
 
-Then copy the YAML skin into Hermes skins. Same name as the folder.
+</div>
 
-Hermes looks here:
+[![The Hermes Themes star atlas: three constellations, Pantheon over a dithered marble Zeus, Kemet over a gilded Thoth, Asgard over a carved Odin, each god a named star](media/hub.png)](https://adolanium.github.io/hermes-themes/)
 
-**Mac and Linux**
+## The packs
 
-```
-~/.hermes/desktop-plugins/
-~/.hermes/skins/
-```
+| Pack | Gods | Look | Repo |
+| --- | --- | --- | --- |
+| [**Pantheon**](https://adolanium.github.io/hermes-pantheon/) | 18 Greek: all twelve Olympians, plus Hades, Nyx, Helios, Selene and Medusa | Dithered marble | [hermes-pantheon](https://github.com/Adolanium/hermes-pantheon) |
+| [**Kemet**](https://adolanium.github.io/hermes-kemet/) | 12 Egyptian, from Thoth to Hathor | Painted relief and gold leaf | [hermes-kemet](https://github.com/Adolanium/hermes-kemet) |
+| [**Asgard**](https://adolanium.github.io/hermes-asgard/) | 12 Norse, from Odin to Bragi | Runestone and carved wood | [hermes-asgard](https://github.com/Adolanium/hermes-asgard) |
 
-**Windows**
+The packs install side by side, and no two gods share a name, so every god shows up in the same theme picker.
 
-```
-%LOCALAPPDATA%\hermes\desktop-plugins\
-%LOCALAPPDATA%\hermes\skins\
-```
+## Install one
 
-If you use a named Hermes profile, put it under that profile instead:
+In Hermes Desktop, open **Capabilities → Plugins**, click **Install from Git** and paste a pack's repo address. Or use the terminal:
 
-```
-~/.hermes/profiles/<name>/desktop-plugins/
-~/.hermes/profiles/<name>/skins/
-```
-
-You want this layout (ee.dd as an example):
-
-```
-desktop-plugins/
-  ee.dd/
-    plugin.js
-    wallpaper.jpg
-    ee.dd.yaml
-
-skins/
-  ee.dd.yaml
+```sh
+hermes plugins install hermes-pantheon
+hermes plugins install Adolanium/hermes-kemet
+hermes plugins install Adolanium/hermes-asgard
 ```
 
-Copy the whole `ee.dd` folder into `desktop-plugins`. Then copy `ee.dd.yaml` into `skins/` too. Same file, two homes. The plugin reads the wallpaper from its folder. The skin file is what `/skin` and `hermes config set display.skin` pick up.
+Then flip the pack's **Desktop** switch on in **Capabilities → Plugins**, and type `/skin` with a god's name in the message box, like `/skin thoth`. Each pack's README has the full details.
 
-Then tell Hermes to use it. Swap in the folder name:
+Pantheon is in the official Hermes plugin catalog, so it installs by name. Kemet and Asgard are in catalog review.
 
-```
-hermes config set display.skin ee.dd
-```
+<br />
 
-In Hermes Desktop, run **Reload desktop plugins** from the command palette. Open a new session to see the splash.
+<div align="center">
+  <strong>Hermes Themes</strong><br />
+  <sub>More worlds on the horizon.</sub>
+</div>
 
-If the painting doesn't show, the plugin folder name has to match the slug (`ee.dd`), and `wallpaper.jpg` has to sit next to `plugin.js`.
+<br />
 
-## What's in the folder
+## License
 
-| File | What it is |
-| --- | --- |
-| `plugin.js` | Desktop theme, wallpaper, and wordmark |
-| `wallpaper.jpg` | Backdrop for the chat |
-| `ee.dd.yaml` | CLI / TUI / desktop palette (name must match the folder) |
+[MIT](LICENSE). The site's fonts are under the SIL Open Font License.
 
-## Revert
-
-```
-hermes config set display.skin default
-```
-
-You can also turn the plugin off under Settings → Plugins.
+> **Community project**
+>
+> Hermes Themes is an independent community project. It is not affiliated with, endorsed by, sponsored by, or officially associated with [Nous Research](https://github.com/NousResearch) or the [Hermes Agent project](https://github.com/NousResearch/hermes-agent). Hermes, Hermes Agent, and Nous Research are names and marks belonging to their respective owners.

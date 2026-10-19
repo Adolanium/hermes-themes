@@ -1,0 +1,187 @@
+/* Hermes Themes: the star atlas. Navy sky, gold and ivory engraving, each pack a constellation. */
+
+@font-face { font-family: 'Cormorant'; src: url(assets/fonts/CormorantGaramond.woff2) format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Bodoni'; src: url(assets/fonts/BodoniModa-var.woff2) format('woff2'); font-weight: 700 900; font-display: swap; }
+@font-face { font-family: 'Plex Sans'; src: url(assets/fonts/IBMPlexSans-var.woff2) format('woff2'); font-weight: 400 600; font-display: swap; }
+@font-face { font-family: 'Plex Mono'; src: url(assets/fonts/IBMPlexMono-400.woff2) format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Plex Mono'; src: url(assets/fonts/IBMPlexMono-500.woff2) format('woff2'); font-weight: 500; font-display: swap; }
+
+:root {
+  --sky: #070b24;
+  --sky-2: #0b1236;
+  --ivory: #f3ead6;
+  --ivory-soft: rgba(243, 234, 214, 0.78);
+  --ivory-dim: rgba(243, 234, 214, 0.56);
+  --gold: #d9b45a;
+  --gold-line: rgba(217, 180, 90, 0.42);
+  --serif: 'Cormorant', 'Bodoni', Georgia, serif;
+  --sans: 'Plex Sans', system-ui, sans-serif;
+  --mono: 'Plex Mono', ui-monospace, monospace;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--sky); }
+body {
+  margin: 0; min-height: 100vh; color: var(--ivory);
+  font: 400 16px/1.6 var(--sans);
+  background: radial-gradient(120% 80% at 50% 30%, var(--sky-2) 0%, var(--sky) 70%);
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--gold); color: var(--sky); }
+:focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
+a { color: inherit; }
+
+#sky, #chart { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 0; }
+#chart circle, #chart line, #chart path { fill: none; stroke: var(--gold-line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+#chart .faint { stroke: rgba(217, 180, 90, 0.16); }
+
+/* ── Top bar ── */
+.bar {
+  position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-between;
+  height: 76px; margin: 0 clamp(20px, 4vw, 64px); border-bottom: 1px solid var(--gold-line);
+}
+.brand { display: flex; align-items: center; gap: 14px; text-decoration: none; font: 700 22px/1 var(--serif); letter-spacing: 0.18em; text-transform: uppercase; }
+.brand svg { width: 22px; height: 22px; fill: var(--gold); }
+nav { display: flex; gap: clamp(18px, 3vw, 40px); font: 400 15px/1 var(--sans); }
+nav a { text-decoration: none; color: var(--ivory-soft); display: inline-flex; align-items: center; gap: 6px; }
+nav a:hover { color: var(--ivory); }
+nav svg, .btn svg, .peek-go svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ── The atlas: one constellation per pack ── */
+main { position: relative; z-index: 2; }
+.atlas {
+  display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr));
+  gap: clamp(8px, 2vw, 32px); padding: 18px clamp(20px, 4vw, 64px) 0;
+  min-height: calc(100vh - 76px - 230px);
+}
+.pack { position: relative; display: grid; grid-template-rows: minmax(0, 1fr) auto; text-align: center; }
+.sky-box { position: relative; min-height: 380px; }
+.figure {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: 50% 60%;
+  opacity: 0; transition: opacity 1.4s var(--ease) 0.2s, filter 0.5s var(--ease);
+  -webkit-mask-image: radial-gradient(75% 85% at 50% 55%, #000 62%, transparent 100%);
+  mask-image: radial-gradient(75% 85% at 50% 55%, #000 62%, transparent 100%);
+}
+.figure.pixel { image-rendering: pixelated; }
+.ready .figure { opacity: 0.92; }
+.pack:hover .figure, .pack:focus-within .figure { filter: brightness(1.12); }
+
+svg.stars { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+svg.stars line { stroke: var(--c); stroke-opacity: 0.7; stroke-width: 1; stroke-dasharray: var(--len); stroke-dashoffset: var(--len); transition: stroke-dashoffset 1.6s var(--ease); }
+.ready svg.stars line { stroke-dashoffset: 0; }
+svg.stars .star { cursor: pointer; outline: none; }
+svg.stars .star circle.core { fill: #fffaf0; transition: r 0.25s var(--ease); }
+svg.stars .star circle.halo { fill: var(--c); opacity: 0.28; transition: opacity 0.25s, r 0.25s var(--ease); }
+svg.stars .star circle.hit { fill: transparent; }
+svg.stars .star:hover circle.halo, svg.stars .star:focus-visible circle.halo { opacity: 0.6; r: 13px; }
+svg.stars .star:hover circle.core, svg.stars .star:focus-visible circle.core { r: 4px; }
+svg.stars text {
+  font: 700 18px/1 var(--serif); fill: var(--ivory); letter-spacing: 0.02em;
+  paint-order: stroke; stroke: var(--sky); stroke-width: 5px; stroke-linejoin: round;
+}
+svg.stars .star text { opacity: 0; transition: opacity 0.25s; }
+svg.stars .star.named text, svg.stars .star:hover text, svg.stars .star:focus-visible text { opacity: 1; }
+svg.stars .twinkle { animation: twinkle 3.2s ease-in-out infinite; }
+@keyframes twinkle { 50% { opacity: 0.55; } }
+
+.plate { padding: 10px 0 8px; }
+.plate h2 {
+  margin: 0; font-size: clamp(38px, 4.4vw, 64px); line-height: 1; letter-spacing: 0.04em; color: var(--c);
+  text-shadow: 0 0 30px color-mix(in srgb, var(--c) 35%, transparent);
+}
+.rule { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 12px auto 10px; width: min(240px, 70%); }
+.rule::before, .rule::after { content: ''; flex: 1; height: 1px; background: var(--gold-line); }
+.rule svg { width: 12px; height: 12px; fill: var(--gold); }
+.plate .count { margin: 0; font: 700 21px/1.2 var(--serif); }
+.plate .material { margin: 2px 0 12px; color: var(--ivory-soft); font-size: 15px; }
+.plate .explore {
+  display: inline-flex; align-items: center; gap: 8px; color: var(--c); text-decoration: none;
+  font: 500 15px/1 var(--sans); padding-bottom: 5px; border-bottom: 1px solid color-mix(in srgb, var(--c) 55%, transparent);
+}
+.plate .explore svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; transition: transform 0.25s var(--ease); }
+.plate .explore:hover svg { transform: translateX(3px); }
+
+/* ── Hero band ── */
+.hero {
+  display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap;
+  margin: 26px clamp(20px, 4vw, 64px) 0; padding: 30px 0 34px; border-top: 1px solid var(--gold-line); position: relative;
+}
+.hero::before {
+  content: ''; position: absolute; top: -9px; left: 50%; width: 18px; height: 18px; transform: translateX(-50%) rotate(45deg);
+  border: 1px solid var(--gold-line); background: var(--sky);
+}
+h1 { margin: 0; font: 700 clamp(44px, 5.4vw, 78px)/0.98 var(--serif); letter-spacing: -0.005em; color: var(--ivory); }
+.hero-text p { margin: 14px 0 0; color: var(--ivory-soft); font-size: 18px; }
+.hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; position: relative; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px; height: 58px; padding: 0 32px;
+  border-radius: 3px; font: 500 18px/1 var(--sans); text-decoration: none; transition: transform 0.2s var(--ease), background 0.2s;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn.primary { background: var(--ivory); color: var(--sky); }
+.btn.ghost { border: 1px solid var(--gold); color: var(--gold); }
+.horizon { position: absolute; right: 0; bottom: -34px; margin: 0; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ivory-dim); }
+.horizon svg { width: 14px; height: 14px; fill: var(--gold); }
+
+/* ── Install and the index ── */
+.install, .index { margin: 0 clamp(20px, 4vw, 64px); padding: clamp(64px, 8vw, 110px) 0 0; }
+.install h2, .index h2 { margin: 0 0 34px; font: 700 clamp(34px, 3.6vw, 52px)/1 var(--serif); }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--gold-line); border-bottom: 1px solid var(--gold-line); counter-reset: s; }
+.steps > li { counter-increment: s; padding: 28px 28px 30px 0; }
+.steps > li + li { padding-left: 28px; border-left: 1px solid var(--gold-line); }
+.steps > li::before { content: counter(s, upper-roman); display: block; font: 700 46px/1 var(--serif); color: var(--gold); margin-bottom: 14px; }
+.steps h3 { margin: 0 0 8px; font: 600 20px/1.2 var(--sans); }
+.steps p { margin: 0; color: var(--ivory-soft); }
+.cmds { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }
+.cmds li { padding: 0 !important; border: 0 !important; }
+.cmds li::before { content: none !important; }
+.cmds code, .steps code { font: 400 13px/1.4 var(--mono); }
+.cmds code { display: block; padding: 9px 12px; border: 1px solid var(--gold-line); border-radius: 3px; background: rgba(7, 11, 36, 0.6); overflow-wrap: anywhere; }
+.steps p code { padding: 1px 6px; border: 1px solid var(--gold-line); border-radius: 3px; }
+
+.index-grid { display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); gap: 32px; }
+.index-grid h3 { margin: 0 0 12px; font: 700 26px/1 var(--serif); color: var(--c); }
+.index-grid ul { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 24px; }
+.index-grid li { break-inside: avoid; padding: 4px 0; }
+.index-grid a { text-decoration: none; color: var(--ivory-soft); display: inline-flex; align-items: center; gap: 8px; }
+.index-grid a::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--c); box-shadow: 0 0 8px var(--c); }
+.index-grid a:hover { color: var(--ivory); }
+
+footer { position: relative; z-index: 2; margin: clamp(64px, 8vw, 110px) clamp(20px, 4vw, 64px) 0; padding: 26px 0 40px; border-top: 1px solid var(--gold-line); }
+footer p { margin: 0; max-width: 80ch; font-size: 13px; color: var(--ivory-dim); }
+
+/* ── Peek: hover a star, see that god in the app ── */
+.peek {
+  position: fixed; z-index: 10; width: 300px; pointer-events: none;
+  border: 1px solid var(--gold); border-radius: 4px; background: rgba(7, 11, 36, 0.96);
+  box-shadow: 0 18px 40px -16px rgba(0, 0, 0, 0.7);
+  opacity: 0; transform: translateY(6px); transition: opacity 0.18s, transform 0.25s var(--ease);
+}
+.peek.on { opacity: 1; transform: none; }
+.peek-bar { padding: 9px 12px; border-bottom: 1px solid var(--gold-line); font: 500 12px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; }
+.peek img { display: block; width: 100%; height: auto; }
+.peek-desc { margin: 0; padding: 10px 12px 0; font-size: 13px; line-height: 1.4; color: var(--ivory-soft); }
+.peek-go { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px 10px; font-size: 13px; color: var(--ivory); }
+
+/* ── Small screens: the constellations stack ── */
+@media (max-width: 900px) {
+  .atlas { grid-template-columns: 1fr; min-height: 0; gap: 40px; }
+  .sky-box { min-height: 0; aspect-ratio: 4 / 3; }
+  .steps, .index-grid { grid-template-columns: 1fr; }
+  .steps > li + li { padding-left: 0; border-left: 0; border-top: 1px solid var(--gold-line); }
+  main { display: flex; flex-direction: column; }
+  .hero { order: -1; margin-top: 0; border-top: 0; padding-top: 18px; }
+  .hero::before { content: none; }
+  .hero { flex-direction: column; align-items: flex-start; }
+  .horizon { position: static; }
+  nav a:not(:last-child) { display: none; }
+  .peek { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .figure, svg.stars line, .peek { transition: none; }
+  svg.stars .twinkle { animation: none; }
+}

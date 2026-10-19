@@ -1,3 +1,7 @@
-.DS_Store
-Thumbs.db
-*.zip
+# Allowlist: only the site and its README are published.
+/*
+!/.gitignore
+!/README.md
+!/LICENSE
+!/docs/
+!/media/

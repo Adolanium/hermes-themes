@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hermes Themes · 42 gods for your Hermes desktop</title>
+<meta name="description" content="Community theme packs for Hermes Desktop: Pantheon (Greek), Kemet (Egyptian) and Asgard (Norse). 42 gods, each with its own art, palette and lettering." />
+<meta name="theme-color" content="#070b24" />
+<meta property="og:title" content="Hermes Themes · 42 gods for your Hermes desktop" />
+<meta property="og:description" content="Community theme packs for Hermes Desktop: Pantheon, Kemet and Asgard." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://adolanium.github.io/hermes-themes/" />
+<meta property="og:image" content="https://adolanium.github.io/hermes-themes/assets/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="atlas.css" />
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<svg id="chart" aria-hidden="true"></svg>
+
+<header class="bar">
+  <a class="brand" href="#top">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 13.6 10.4 22.5 12 13.6 13.6 12 22.5 10.4 13.6 1.5 12 10.4 10.4Z" /></svg>
+    Hermes Themes
+  </a>
+  <nav>
+    <a href="#atlas">The atlas</a>
+    <a href="#install">How to install</a>
+    <a href="https://github.com/Adolanium/hermes-themes">GitHub
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5m0 0H6m5 0v5" /></svg></a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="atlas" id="atlas" aria-label="The theme packs"></section>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1><span id="total">42</span> gods for your<br />Hermes desktop.</h1>
+      <p>Community theme packs for Hermes Desktop. Choose your world.</p>
+    </div>
+    <div class="hero-actions">
+      <a class="btn primary" href="#atlas">Browse all packs
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10m0 0-4-4m4 4-4 4" /></svg></a>
+      <a class="btn ghost" href="#install">How to install</a>
+      <p class="horizon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 13.6 10.4 22.5 12 13.6 13.6 12 22.5 10.4 13.6 1.5 12 10.4 10.4Z" /></svg>
+        More worlds on the horizon
+      </p>
+    </div>
+  </section>
+
+  <section class="install" id="install" aria-labelledby="install-title">
+    <h2 id="install-title">Install a pack in a minute</h2>
+    <ol class="steps">
+      <li>
+        <h3>Install</h3>
+        <p>In Hermes Desktop, open <b>Capabilities&nbsp;→&nbsp;Plugins</b>, click <b>Install&nbsp;from&nbsp;Git</b> and paste a pack's address. Or use the terminal:</p>
+        <ul class="cmds" id="cmds"></ul>
+      </li>
+      <li>
+        <h3>Turn it on</h3>
+        <p>The pack appears in <b>Capabilities&nbsp;→&nbsp;Plugins</b>. Flip its <b>Desktop</b> switch on. Packs installed from Git start turned off.</p>
+      </li>
+      <li>
+        <h3>Pick a god</h3>
+        <p>Type <code>/skin</code> and a god's name in the message box, like <code>/skin thoth</code>. The packs install side by side, and no two gods share a name.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="index" aria-labelledby="index-title">
+    <h2 id="index-title">Every god</h2>
+    <div class="index-grid" id="index"></div>
+  </section>
+</main>
+
+<footer>
+  <p>Hermes Themes is an independent community project. It is not affiliated with, endorsed by, sponsored by, or officially associated with Nous Research or the Hermes Agent project. Hermes, Hermes Agent, and Nous Research are names and marks belonging to their respective owners. MIT licensed; fonts under the SIL Open Font License.</p>
+</footer>
+
+<aside class="peek" id="peek" aria-hidden="true">
+  <div class="peek-bar"><span id="peek-title"></span></div>
+  <img id="peek-img" alt="" width="640" height="400" />
+  <p class="peek-desc" id="peek-desc"></p>
+  <span class="peek-go">Preview in Hermes Desktop
+    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5" /></svg></span>
+</aside>
+
+<script src="assets/atlas.js"></script>
+<script src="atlas.js"></script>
+</body>
+</html>
